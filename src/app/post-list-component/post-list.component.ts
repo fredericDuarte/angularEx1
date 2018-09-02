@@ -6,10 +6,10 @@ import {PostService} from "../service/post.service";
 
 @Component({
   selector: 'app-post-list-component',
-  templateUrl: './post-list-component.component.html',
-  styleUrls: ['./post-list-component.component.css']
+  templateUrl: './post-list.component.html',
+  styleUrls: ['./post-list-component..css']
 })
-export class PostListComponentComponent implements OnInit , OnDestroy {
+export class PostListComponent implements OnInit , OnDestroy {
 
   posts: Post[];
   postsSubscription: Subscription;
@@ -27,14 +27,6 @@ export class PostListComponentComponent implements OnInit , OnDestroy {
 
   onNewPost() {
     this.router.navigate(['/posts', 'new']);
-  }
-
-  onDeletePost(post: Post) {
-    this.postsService.removePost(post);
-  }
-
-  onViewPost(id: number) {
-    this.router.navigate(['/posts', 'view', id]);
   }
 
   ngOnDestroy() {

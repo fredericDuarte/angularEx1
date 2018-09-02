@@ -1,11 +1,14 @@
 import { Component, Input,OnInit } from '@angular/core';
+import {Post} from "../models/post.model";
+import {PostService} from "../service/post.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-post-list-item-component',
-  templateUrl: './post-list-item-component.component.html',
-  styleUrls: ['./post-list-item-component.component.css']
+  templateUrl: './post-list-item.component.html',
+  styleUrls: ['./post-list-item.component.css']
 })
-export class PostListItemComponentComponent implements OnInit {
+export class PostListItemComponent implements OnInit {
 
   @Input() postTitle: string;
   @Input() postContent: string;
@@ -13,17 +16,22 @@ export class PostListItemComponentComponent implements OnInit {
   @Input() postDate: Date;
   @Input() index: number;
 
-  constructor() { }
+  constructor(private postsService: PostService) {}
 
   ngOnInit() {
   }
 
+
+  onDeletePost() {
+    this.postsService.removePost(this.index);
+  }
+
   noLoveIt() {
-    this.postLoveIts--;
+    this.postsService.loveLess(this.index);
   }
 
   loveIt() {
-    this.postLoveIts++;
+    this.postsService.lovePlus(this.index);
   }
 
   getColor() {
